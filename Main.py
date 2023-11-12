@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from PyQt5.QtCore import QTimer, QTime
+from PyQt5.QtWidgets import QWidget
 import interface
 import os
-
-
 class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self):
         super(Player, self).__init__()
@@ -25,7 +24,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_slider)
-        self.timer.start(1000)  # Обновление ползунка каждые 100 миллисекунд
+        self.timer.start(1000)  # Обновление ползунка каждые * миллисекунд
         self.music_Slider.sliderReleased.connect(
         self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
         #
@@ -68,9 +67,9 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             self.music_Slider.setValue(position)
             #
             position_time = QTime(0, 0)
-            position_time = position_time.addMSecs(position * 1000)
+            position_time = position_time.addMSecs(position * 60)
             duration_time = QTime(0, 0)
-            duration_time = duration_time.addMSecs(duration * 1000)
+            duration_time = duration_time.addMSecs(duration * 60)
             #
             self.timeEdit_1.setTime(position_time)
             self.timeEdit_2.setTime(duration_time)

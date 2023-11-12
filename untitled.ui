@@ -278,6 +278,16 @@
        </rect>
       </property>
      </widget>
+     <widget class="QWidget" name="widget_visual" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>415</width>
+        <height>90</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
