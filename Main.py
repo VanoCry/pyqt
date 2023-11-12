@@ -1,7 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from PyQt5.QtCore import QTimer, QTime
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtGui import QCursor, QPixmap
 import interface
 import os
 from random import shuffle
@@ -9,10 +8,6 @@ from random import shuffle
 class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self):
         super(Player, self).__init__()
-        # self.pixmap = QPixmap("myCursor.png")
-        # self.cursor = QCursor(self.pixmap, 512, 512)
-        # self.my_widget = QWidget()
-        # self.my_widget.setCursor(self.cursor)
         self.setupUi(self)
         self.actionAdd_folder.triggered.connect(self.load_folder)
         self.pushButton_pause.clicked.connect(self.play)
@@ -52,7 +47,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
             self.pushButton_pause.setText("⏸")
         else:
-            self.pushButton_pause.setText("🎶")
+            self.pushButton_pause.setText("▶")
 
     def load_folder(self):
         self.listWidget.clear()
