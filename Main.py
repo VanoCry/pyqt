@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
+from PyQt5.QtCore import QTimer, QTime
 import interface
 import os
 
@@ -14,8 +15,20 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.mediaPlayer.setVolume(self.volume_Slider.value())
         self.volume_Slider.valueChanged.connect(self.volume_change)
         self.pushButton_next.clicked.connect(self.next_song)
+        self.listWidget.itemSelectionChanged.connect(self.select_item)
         self.dir = ""
+        self.item = ""
+        self.content = ""
         self.played = False
+        # код слайдера отслеживания таймингов
+        self.music_Slider.setTracking(True)  # Включение отслеживание перемещения ползунка (перемещение по песне)
+
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_slider)
+        self.timer.start(1000)  # Обновление ползунка каждые 100 миллисекунд
+        self.music_Slider.sliderReleased.connect(
+        self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
+        #
         #⏸️▶️
 
     def load_folder(self):
@@ -29,18 +42,14 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                 self.dir = dir
 
     def play(self):
-        item = self.listWidget.currentItem()
         played = self.played
-        if item:
+        if self.item:
             if not played:
-                file_name = os.path.join(item.text())
-                content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_name))
-                self.mediaPlayer.setMedia(content)
                 self.pushButton_pause.setText("⏸")
                 self.played = True
                 self.mediaPlayer.play()
             else:
-                self.mediaPlayer.stop()
+                self.mediaPlayer.pause()
                 self.pushButton_pause.setText("▶")
                 self.played = False
 
@@ -49,6 +58,34 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     def next_song(self):
         pass
+
+    def update_slider(self):
+        if self.played:
+            position = self.mediaPlayer.position()
+            duration = self.mediaPlayer.duration()
+            #
+            self.music_Slider.setMaximum(duration)
+            self.music_Slider.setValue(position)
+            #
+            position_time = QTime(0, 0)
+            position_time = position_time.addMSecs(position * 1000)
+            duration_time = QTime(0, 0)
+            duration_time = duration_time.addMSecs(duration * 1000)
+            #
+            self.timeEdit_1.setTime(position_time)
+            self.timeEdit_2.setTime(duration_time)
+
+    def set_media_position(self):
+        position = self.music_Slider.value()
+        self.mediaPlayer.setPosition(position)
+
+
+
+    def select_item(self):
+        self.item = self.listWidget.currentItem()
+        file_name = os.path.join(self.item.text())
+        self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_name))
+        self.mediaPlayer.setMedia(self.content)
 
 
 if __name__ == '__main__':
