@@ -10,8 +10,17 @@
     <height>800</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>CryptoPyPlayer</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0.0227273, stop:0 rgb(255, 157, 251), stop:1 rgb(226, 185, 255))</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -23,12 +32,15 @@
       <height>761</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Player</string>
      </attribute>
      <widget class="QPushButton" name="pushButton_next">
       <property name="geometry">
@@ -46,6 +58,9 @@
         <weight>75</weight>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(176, 71, 203, 255), stop:1 rgba(147, 110, 255, 255))</string>
       </property>
       <property name="text">
        <string>⏭️</string>
@@ -68,6 +83,9 @@
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(176, 71, 203, 255), stop:1 rgba(147, 110, 255, 255))</string>
+      </property>
       <property name="text">
        <string>⏪</string>
       </property>
@@ -89,8 +107,13 @@
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0.0746269, y1:0.722, x2:1, y2:0, stop:0 rgba(147, 110, 255, 255), stop:1 rgba(176, 71, 203, 255));
+border-radius: 10px
+</string>
+      </property>
       <property name="text">
-       <string>▶️</string>
+       <string>🎶</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_next5sec">
@@ -109,6 +132,9 @@
         <weight>75</weight>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(147, 110, 255, 255), stop:1 rgba(176, 71, 203, 255))</string>
       </property>
       <property name="text">
        <string>⏩</string>
@@ -131,6 +157,9 @@
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(147, 110, 255, 255), stop:1 rgba(176, 71, 203, 255))</string>
+      </property>
       <property name="text">
        <string>⏮️</string>
       </property>
@@ -150,6 +179,10 @@
         <height>10</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(207, 128, 255), stop:1 rgb(120, 2, 255));
+ border-radius: 10px; </string>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -157,7 +190,7 @@
      <widget class="QTimeEdit" name="timeEdit_1">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>150</y>
         <width>70</width>
         <height>22</height>
@@ -179,7 +212,7 @@
      <widget class="QTimeEdit" name="timeEdit_2">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>100</x>
         <y>150</y>
         <width>70</width>
         <height>22</height>
@@ -198,7 +231,7 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>65</x>
+        <x>70</x>
         <y>140</y>
         <width>21</width>
         <height>31</height>
@@ -225,6 +258,10 @@
         <height>22</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(207, 128, 255), stop:1 rgb(120, 2, 255));
+ border-radius: 10px; </string>
+      </property>
       <property name="value">
        <number>75</number>
       </property>
@@ -246,6 +283,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(147, 110, 255, 255), stop:1 rgba(176, 71, 203, 255))</string>
+      </property>
       <property name="text">
        <string>🔁</string>
       </property>
@@ -264,6 +304,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(176, 71, 203, 255), stop:1 rgba(147, 110, 255, 255))</string>
+      </property>
       <property name="text">
        <string>🔀</string>
       </property>
@@ -276,6 +319,9 @@
         <width>420</width>
         <height>361</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:0.0199005, y1:0.625, x2:1, y2:0, stop:0 rgba(201, 99, 255, 255), stop:0.970149 rgba(255, 255, 255, 255))</string>
       </property>
      </widget>
      <widget class="QWidget" name="widget_visual" native="true">
@@ -291,7 +337,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Equalizer</string>
      </attribute>
      <widget class="QPushButton" name="pushButton_mono">
       <property name="geometry">
