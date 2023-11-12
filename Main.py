@@ -22,6 +22,8 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.item = ""
         self.content = ""
         self.playback_direction = 1  # 1 для воспроизведения вперед, -1 для воспроизведения назад
+        self.paths = []  # Список полных путей к файлам
+        self.names = []  # Список названий файлов для отображения в listWidget
         #
         self.play_check_timer = QTimer(self)
         self.play_check_timer.timeout.connect(self.check_playback_state)
@@ -46,10 +48,20 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         dir = QtWidgets.QFileDialog.getExistingDirectory(self, "Select directory")
 
         if dir:
+            self.paths = []  # Очистите список полных путей
+            self.names = []  # Очистите список названий файлов
+
             for file_name in os.listdir(dir):
                 if file_name.endswith(".mp3"):
-                    self.listWidget.addItem(os.path.join(dir, file_name))
-                self.dir = dir
+                    full_path = os.path.join(dir, file_name)
+                    song_name = os.path.basename(file_name)
+
+                    self.paths.append(full_path)  # Сохраните полный путь
+                    self.names.append(song_name)  # Сохраните название файла
+
+                    self.listWidget.addItem(song_name)  # Отображайте название в listWidget
+
+            self.dir = dir
 
     def play(self):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
@@ -81,8 +93,9 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     def select_item(self):
         self.item = self.listWidget.currentItem()
-        file_name = os.path.join(self.item.text())
-        self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_name))
+        index = self.listWidget.currentRow()  # Получите индекс выбранной песни
+        file_path = self.paths[index]  # Используйте индекс для получения полного пути к файлу
+        self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_path))
         self.mediaPlayer.setMedia(self.content)
 
     def next_song(self):
