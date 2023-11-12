@@ -3,7 +3,7 @@ from PyQt5.QtCore import QTimer, QTime
 from PyQt5.QtWidgets import QWidget
 import interface
 import os
-
+from random import shuffle
 
 class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self):
@@ -15,8 +15,14 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.mediaPlayer = QtMultimedia.QMediaPlayer()
         self.mediaPlayer.setVolume(self.volume_Slider.value())
         self.volume_Slider.valueChanged.connect(self.volume_change)
+        #
         self.pushButton_next.clicked.connect(self.next_song)
         self.pushButton_prev.clicked.connect(self.prev_song)
+        self.pushButton_next5sec.clicked.connect(self.next_song5sec)
+        self.pushButton_prev5sec.clicked.connect(self.prev_song5sec)
+        #
+        self.pushButton_shuffle.clicked.connect(self.shuffle_tracks)
+        #
         self.listWidget.itemSelectionChanged.connect(self.select_item)
         self.dir = ""
         self.item = ""
@@ -33,7 +39,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_slider)
-        self.timer.start(1000)  # Обновление ползунка каждые * миллисекунд
+        self.timer.start(200)  # Обновление ползунка каждые * миллисекунд
         self.music_Slider.sliderReleased.connect(
             self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
 
@@ -80,9 +86,9 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.music_Slider.setValue(position)
         #
         position_time = QTime(0, 0)
-        position_time = position_time.addMSecs(position)
+        position_time = position_time.addMSecs(position * 60)
         duration_time = QTime(0, 0)
-        duration_time = duration_time.addMSecs(duration)
+        duration_time = duration_time.addMSecs(duration * 60)
         #
         self.timeEdit_1.setTime(position_time)
         self.timeEdit_2.setTime(duration_time)
@@ -141,6 +147,27 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
             if was_playing:
                 self.play()
+
+    def next_song5sec(self):
+        position = self.music_Slider.value() + 5000
+        self.mediaPlayer.setPosition(position)
+    def prev_song5sec(self):
+        position = self.music_Slider.value() - 5000
+        self.mediaPlayer.setPosition(position)
+
+    def shuffle_tracks(self):
+        if self.paths:
+            # Создаем список кортежей с названиями и путями
+            songs = list(zip(self.names, self.paths))
+            shuffle(songs)  # Перемешиваем список кортежей
+            self.names, self.paths = zip(*songs)  # Распаковываем перемешанные данные обратно
+
+            # Очищаем listWidget
+            self.listWidget.clear()
+
+            # Добавляем перемешанные названия файлов в listWidget
+            for song_name in self.names:
+                self.listWidget.addItem(song_name)
 
 
 if __name__ == '__main__':
