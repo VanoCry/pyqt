@@ -50,18 +50,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.label_track_timer.start(300)
 
     def running_label(self):
-            def running_label(self):
-                current_text = self.label_track.text()  # Получаем текущий текст из QLabel
 
-                if current_text:
-                    # Получаем подстроку, начиная с текущей позиции
-                    scrolled_text = current_text[self.position:] + current_text[:self.position]
-                    self.label_track.setText(scrolled_text)
-
-                    # Увеличиваем текущую позицию
-                    self.position += 1
-                    if self.position >= len(current_text):
-                        self.position = 0
 
     def check_playback_state(self):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
