@@ -135,7 +135,7 @@ class Ui_MainWindow(object):
         self.audio_container.setGeometry(QtCore.QRect(0, 10, 415, 90))
         self.audio_container.setObjectName("audio_container")
         self.label_track = QtWidgets.QLabel(self.tab)
-        self.label_track.setGeometry(QtCore.QRect(0, 102, 421, 31))
+        self.label_track.setGeometry(QtCore.QRect(0, 102, 550, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe Print")
         font.setPointSize(12)

@@ -46,7 +46,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
         self.label_track_timer = QTimer(self)
         self.label_track_timer.timeout.connect(self.running_label)
-        self.label_track_timer.start(300)
+        self.label_track_timer.start(30)
         self.x = 0
         self.y = 102
 
@@ -56,11 +56,11 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             # пределы окна
             self.x = 250  # если вышла за пределы то устанавливаем исходную координату
             # self.x
-            self.x = self.x - 10  # отнимаем от текущего значения координаты х    0.5
+            self.x = self.x - 1  # отнимаем от текущего значения координаты х    0.5
             self.label_track.move(self.x, self.y)  # передвигаем  бегущую строку
 
         else:
-            self.x = self.x - 10
+            self.x = self.x - 1
             self.label_track.move(self.x, self.y)
 
     def check_playback_state(self):
