@@ -1,3 +1,4 @@
+import time
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from PyQt5.QtCore import QTimer, QTime
 from PyQt5.QtWidgets import QWidget
@@ -9,10 +10,6 @@ from random import shuffle
 class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
     def __init__(self):
         super(Player, self).__init__()
-        # self.pixmap = QPixmap("myCursor.png")
-        # self.cursor = QCursor(self.pixmap, 512, 512)
-        # self.my_widget = QWidget()
-        # self.my_widget.setCursor(self.cursor)
         self.setupUi(self)
         self.actionAdd_folder.triggered.connect(self.load_folder)
         self.pushButton_pause.clicked.connect(self.play)
@@ -44,7 +41,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_slider)
-        self.timer.start(200)  # Обновление ползунка каждые * миллисекунд
+        self.timer.start(350)  # Обновление ползунка каждые * миллисекунд
         self.music_Slider.sliderReleased.connect(
             self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
 
@@ -89,14 +86,17 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         #
         self.music_Slider.setMaximum(duration)
         self.music_Slider.setValue(position)
-        #
+        # Таймеры под слайдером
         position_time = QTime(0, 0)
         position_time = position_time.addMSecs(position * 60)
         duration_time = QTime(0, 0)
         duration_time = duration_time.addMSecs(duration * 60)
-        #
         self.timeEdit_1.setTime(position_time)
         self.timeEdit_2.setTime(duration_time)
+        # Переход в конце трека
+        if self.mediaPlayer.position() == self.music_Slider.maximum() and self.music_Slider.maximum() > 5:
+            self.next_song()
+            self.mediaPlayer.play()
 
     def set_media_position(self):
         position = self.music_Slider.value()
@@ -108,6 +108,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         file_path = self.paths[index]  # Используйте индекс для получения полного пути к файлу
         self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_path))
         self.mediaPlayer.setMedia(self.content)
+        self.label_track.setText(self.item.text())
 
     def next_song(self):
         if self.listWidget.count() != 0:
@@ -131,11 +132,12 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
             if was_playing:
                 self.play()
 
+
+
     def prev_song(self):
         if self.listWidget.count() != 0:
             current_row = self.listWidget.currentRow()
             was_playing = (self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState)
-
             if self.playback_direction == 1:
                 prev_row = current_row - 1
             else:
