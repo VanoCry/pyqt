@@ -50,7 +50,16 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.label_track_timer.start(300)
 
     def running_label(self):
-        pass
+        if self.x == -100:  # проверяем не вышла ли бегущая строка далеко влево за
+            # пределы окна
+            self.x = 400  # если вышла за пределы то устанавливаем исходную координату
+            # self.x
+            self.x = self.x - 5  # отнимаем от текущего значения координаты х    0.5
+            self.label_track.move(self.x, self.y)  # передвигаем  бегущую строку
+
+        else:
+            self.x = self.x - 5
+            self.label_track.move(self.x, self.y)
 
     def check_playback_state(self):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
