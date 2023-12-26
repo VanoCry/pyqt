@@ -41,7 +41,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_slider)
-        self.timer.start(350)  # Обновление ползунка каждые * миллисекунд
+        self.timer.start(1000)  # Обновление ползунка каждые * миллисекунд
         self.music_Slider.sliderReleased.connect(
             self.set_media_position)  # Обновление позиции медиаплеера при отпускании ползунка
 
@@ -50,7 +50,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.label_track_timer.start(300)
 
     def running_label(self):
-
+        pass
 
     def check_playback_state(self):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
@@ -115,7 +115,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         file_path = self.paths[index]  # Используйте индекс для получения полного пути к файлу
         self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_path))
         self.mediaPlayer.setMedia(self.content)
-        self.label_track.setText(self.item.text())
+        self.label_track.setText(self.item.text()[:-4])
 
 
     def next_song(self):
