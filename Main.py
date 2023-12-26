@@ -50,27 +50,6 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.label_track_timer.start(300)
 
     def running_label(self):
-        import sys
-        from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-        from PyQt5.QtCore import QTimer
-
-        class MainWindow(QMainWindow):
-            def __init__(self):
-                super().__init__()
-
-                self.setWindowTitle("Бегущая строка с использованием QLabel")
-
-                self.label_track = QLabel(self)
-                self.label_track.setStyleSheet("border: 1px solid black;")  # Добавление рамки для видимости QLabel
-                self.setCentralWidget(self.label_track)
-
-                self.track_name = ""  # Начальное значение текста
-                self.position = 0
-
-                self.label_track_timer = QTimer(self)
-                self.label_track_timer.timeout.connect(self.running_label)
-                self.label_track_timer.start(300)  # Интервал времени для обновления текста в миллисекундах
-
             def running_label(self):
                 current_text = self.label_track.text()  # Получаем текущий текст из QLabel
 
@@ -83,12 +62,6 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
                     self.position += 1
                     if self.position >= len(current_text):
                         self.position = 0
-
-        if __name__ == "__main__":
-            app = QApplication(sys.argv)
-            window = MainWindow()
-            window.show()
-            sys.exit(app.exec_())
 
     def check_playback_state(self):
         if self.mediaPlayer.state() == QtMultimedia.QMediaPlayer.PlayingState:
@@ -154,6 +127,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.content = QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_path))
         self.mediaPlayer.setMedia(self.content)
         self.label_track.setText(self.item.text())
+
 
     def next_song(self):
         if self.listWidget.count() != 0:
