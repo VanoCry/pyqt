@@ -336,13 +336,18 @@ border-radius: 10px
         <height>90</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-image: url(&quot;synthwave.jpg&quot;);
+
+</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_track">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-50</x>
         <y>102</y>
-        <width>421</width>
+        <width>550</width>
         <height>31</height>
        </rect>
       </property>

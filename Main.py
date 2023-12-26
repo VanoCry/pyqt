@@ -33,7 +33,7 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.paths = []  # Список полных путей к файлам
         self.names = []  # Список названий файлов для отображения в listWidget
         #Гифка
-        
+
         #
         self.play_check_timer = QTimer(self)
         self.play_check_timer.timeout.connect(self.check_playback_state)
@@ -54,9 +54,9 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
 
     def running_label(self):
 
-        if self.x == -200:  # проверяем не вышла ли бегущая строка далеко влево за
+        if self.x == -150:  # проверяем не вышла ли бегущая строка далеко влево за
             # пределы окна
-            self.x = 250  # если вышла за пределы то устанавливаем исходную координату
+            self.x = 300  # если вышла за пределы то устанавливаем исходную координату
             # self.x
             self.x = self.x - 1  # отнимаем от текущего значения координаты х    0.5
             self.label_track.move(self.x, self.y)  # передвигаем  бегущую строку

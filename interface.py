@@ -133,9 +133,12 @@ class Ui_MainWindow(object):
         self.listWidget.setObjectName("listWidget")
         self.audio_container = QtWidgets.QWidget(self.tab)
         self.audio_container.setGeometry(QtCore.QRect(0, 10, 415, 90))
+        self.audio_container.setStyleSheet("background-image: url(\"synthwave.jpg\");\n"
+"\n"
+"")
         self.audio_container.setObjectName("audio_container")
         self.label_track = QtWidgets.QLabel(self.tab)
-        self.label_track.setGeometry(QtCore.QRect(0, 102, 550, 31))
+        self.label_track.setGeometry(QtCore.QRect(-50, 102, 550, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe Print")
         font.setPointSize(12)
@@ -249,13 +252,3 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Equalizer"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionAdd_folder.setText(_translate("MainWindow", "Add folder"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
