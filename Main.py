@@ -32,6 +32,8 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         self.playback_direction = 1  # 1 для воспроизведения вперед, -1 для воспроизведения назад
         self.paths = []  # Список полных путей к файлам
         self.names = []  # Список названий файлов для отображения в listWidget
+        #Гифка
+        
         #
         self.play_check_timer = QTimer(self)
         self.play_check_timer.timeout.connect(self.check_playback_state)
