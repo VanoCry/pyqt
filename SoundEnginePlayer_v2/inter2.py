@@ -38,14 +38,14 @@ class Ui_MainWindow(object):
         self.horizontalSlider_volume.setGeometry(QtCore.QRect(150, 25, 100, 50))
         self.horizontalSlider_volume.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgb(255, 183, 67), stop:1 rgba(255, 231, 150, 255))\n"
 "")
-        self.horizontalSlider_volume.setMaximum(100)
-        self.horizontalSlider_volume.setProperty("value", 50)
+        self.horizontalSlider_volume.setMaximum(25)
+        self.horizontalSlider_volume.setProperty("value", 10)
         self.horizontalSlider_volume.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_volume.setObjectName("horizontalSlider_volume")
         self.pushButton_mute = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_mute.setGeometry(QtCore.QRect(250, 25, 50, 50))
         font = QtGui.QFont()
-        font.setPointSize(19)
+        font.setPointSize(16)
         self.pushButton_mute.setFont(font)
         self.pushButton_mute.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgb(255, 183, 67), stop:1 rgba(255, 231, 150, 255))\n"
 "")

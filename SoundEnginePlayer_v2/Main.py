@@ -3,6 +3,10 @@ import wave
 #####
 ## Тварь номер 1
 import simpleaudio
+## Тварь номер 2 (звук винды)
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 ##
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from PyQt5.QtCore import QTimer, QTime
@@ -26,10 +30,17 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
     dir = ""
     paths = []
     names = []
+    volume = None  # Изменил имя переменной
     def __init__(self):
         super(Player, self).__init__()
         self.setupUi(self)
         self.setFixedSize(self.size())
+        ## Звук винды
+        devices = AudioUtilities.GetSpeakers()
+        interface = devices.Activate(
+            IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+        self.volume = cast(interface, POINTER(IAudioEndpointVolume))  # Сохраняем интерфейс в переменной
+        ##
         #
         self.pushButton_play.clicked.connect(self.play)
         #
@@ -37,7 +48,7 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
         #
         self.listWidget.itemSelectionChanged.connect(self.select_item)
         #
-
+        self.horizontalSlider_volume.valueChanged.connect(self.update_volume)
         #
     def load_folder(self):
         self.listWidget.clear()
@@ -96,11 +107,17 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
 ###### pip install simpleaudio ############
         # Кровь и пот 3 часов дэбага, хотя нет подожди, уже sка 4 часа дэбага
         # всё работает и славно 11.01.2024 1:57
-
-
-        def volume_change(self):
-            pass
-
+    def update_volume(self):
+        volume = self.horizontalSlider_volume.value()
+        self.volume.SetMasterVolumeLevelScalar(volume / 100, None)
+        if self.horizontalSlider_volume.value() == 0:
+            self.pushButton_mute.setText("🔇")
+        elif self.horizontalSlider_volume.value() > 0 and self.horizontalSlider_volume.value() <= 10:
+            self.pushButton_mute.setText("🔈")
+        elif self.horizontalSlider_volume.value() > 10 and self.horizontalSlider_volume.value() < 20:
+            self.pushButton_mute.setText("🔉")
+        elif self.horizontalSlider_volume.value() >= 20 and self.horizontalSlider_volume.value() <= 25:
+            self.pushButton_mute.setText("🔊")
         def update_slider(self):
             pass
 
@@ -109,9 +126,6 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
 
         def select_item(self):
             pass
-
-
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

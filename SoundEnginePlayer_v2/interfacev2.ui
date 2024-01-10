@@ -88,10 +88,10 @@ background-color:rgb(255, 255, 220)</string>
 </string>
     </property>
     <property name="maximum">
-     <number>100</number>
+     <number>25</number>
     </property>
     <property name="value">
-     <number>50</number>
+     <number>10</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -108,7 +108,7 @@ background-color:rgb(255, 255, 220)</string>
     </property>
     <property name="font">
      <font>
-      <pointsize>19</pointsize>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="toolTip">
