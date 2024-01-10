@@ -1,6 +1,5 @@
 # CryptoPyPlayer (V1.0) 
-## Простой mp3 плеер на Python (в данный момент разрабатывается продвинутая версия)
-## Продвинутая версия описана ниже⬇️
+## Простой mp3 плеер на Python 
 ### Программа разработана в рамках курсового проекта
 ![image](https://github.com/VanoCry/pyqt/assets/76244655/88c23830-16a1-421f-a47c-4f8eb90f7a0a)
 ![image](https://github.com/VanoCry/pyqt/assets/76244655/e1b6f40f-742a-4d64-9a29-df31118a5c82)
