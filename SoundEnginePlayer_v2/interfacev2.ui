@@ -55,7 +55,7 @@ background-color:rgb(255, 255, 220)</string>
      <string notr="true">background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:0.005, y2:0.494, stop:0 rgba(255, 229, 121, 255), stop:1 rgb(255, 183, 67))</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_track">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -71,7 +71,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QSlider" name="horizontalSlider">
+   <widget class="QSlider" name="horizontalSlider_volume">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -91,7 +91,7 @@ background-color:rgb(255, 255, 220)</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_mute">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -132,7 +132,7 @@ background-color:rgb(255, 255, 220)</string>
      <string notr="true">background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgba(255, 231, 150, 255), stop:1 rgb(255, 183, 67))</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_equalizer">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -156,7 +156,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>🎛️</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_play">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -181,7 +181,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>⏸</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="pushButton_prev">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -206,7 +206,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>⏮</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="pushButton_next">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -231,7 +231,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>⏭</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="pushButton_shuffle">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -256,7 +256,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>🔀</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="pushButton_forth">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -281,7 +281,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>👇🏻</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="pushButton_expand_list">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -306,7 +306,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>🔽</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="lineEdit_search">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -319,7 +319,7 @@ background-color:rgb(255, 255, 220)</string>
      <string>Поле поиска трека</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="pushButton_search">
     <property name="geometry">
      <rect>
       <x>275</x>
@@ -356,7 +356,7 @@ background-color:rgb(255, 255, 220)</string>
      <string notr="true">background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgba(255, 231, 150, 255), stop:1 rgb(255, 183, 67))</string>
     </property>
    </widget>
-   <widget class="QSlider" name="horizontalSlider_2">
+   <widget class="QSlider" name="horizontalSlider_track">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -383,6 +383,7 @@ background-color:rgb(255, 255, 220)</string>
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="action_OpenFolder"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -393,6 +394,11 @@ background-color:rgb(255, 255, 220)</string>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_OpenFolder">
+   <property name="text">
+    <string>Открыть папку</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

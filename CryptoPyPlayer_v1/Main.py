@@ -76,8 +76,8 @@ class Player(QtWidgets.QMainWindow, interface.Ui_MainWindow):
         dir = QtWidgets.QFileDialog.getExistingDirectory(self, "Select directory")
 
         if dir:
-            self.paths = []  # Очистите список полных путей
-            self.names = []  # Очистите список названий файлов
+            self.paths = []
+            self.names = []
 
             for file_name in os.listdir(dir):
                 if file_name.endswith(".mp3"):
