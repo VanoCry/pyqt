@@ -87,6 +87,12 @@ background-color:rgb(255, 255, 220)</string>
      <string notr="true">background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgb(255, 183, 67), stop:1 rgba(255, 231, 150, 255))
 </string>
     </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -178,7 +184,7 @@ background-color:rgb(255, 255, 220)</string>
 </string>
     </property>
     <property name="text">
-     <string>⏸</string>
+     <string>▶</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_prev">

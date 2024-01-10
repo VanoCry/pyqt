@@ -1,6 +1,9 @@
 import time
 import wave
 #####
+## Тварь номер 1
+import simpleaudio
+##
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia
 from PyQt5.QtCore import QTimer, QTime
 from PyQt5.QtWidgets import QWidget
@@ -16,23 +19,26 @@ from pydub.playback import play
 
 #
 class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
+    audio = None
+    player = None
+    is_playing = False
+    item = []
+    dir = ""
+    paths = []
+    names = []
     def __init__(self):
-        self.is_playing = False
-        self.item = []
-        self.dir = ""
-        self.paths = []
-        self.names = []
-        self.file_path = None
         super(Player, self).__init__()
         self.setupUi(self)
         self.setFixedSize(self.size())
         #
+        self.pushButton_play.clicked.connect(self.play)
+        #
         self.action_OpenFolder.triggered.connect(self.load_folder)
         #
         self.listWidget.itemSelectionChanged.connect(self.select_item)
-        ###
+        #
 
-        ###
+        #
     def load_folder(self):
         self.listWidget.clear()
         self.dir = QtWidgets.QFileDialog.getExistingDirectory(self, "Select directory")
@@ -59,50 +65,50 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
     def prev_song(self):
         pass
 
-    def select_item(self):
-        self.item = self.listWidget.currentItem()
-        index = self.listWidget.currentRow()  # Получите индекс выбранной песни
-        self.file_path = self.paths[index]  # Используйте индекс для получения полного пути к файлу
-        ## прописать плеер селект
-        self.label_track.setText(self.item.text()[:-4])
 
-
-class Interface:
     def running_label(self):
         pass
-
-
-class Sound:
     def check_playback_state(self):
         pass
 
-    def play(self):
-        if not Player.is_playing:
-            Player.pushButton_play.setText('⏸')
-            self.play_audio()
-        else:
-            Player.pushButton_play.setText('▶️')
-            self.stop_audio()
-
-    def play_audio(self):
-        if Player.file_path != None:
-            self.audio = AudioSegment.from_mp3(Player.file_path)
-            self.audio_thread = AudioThread(self.audio)################################################
-            self.audio_thread.start()
-
-    def stop_audio(self):
-
-    def volume_change(self):
-        pass
-
-    def update_slider(self):
-        pass
-
-    def set_media_position(self):
-        pass
-
     def select_item(self):
-        pass
+        self.item = self.listWidget.currentItem()
+        index = self.listWidget.currentRow()
+        self.file_path = self.paths[index]
+        self.audio = AudioSegment.from_file(self.file_path, format="mp3")
+        self.label_track.setText(self.item.text()[:-4])
+
+    def play(self):
+        if self.audio and not self.is_playing:
+            self.player = simpleaudio.play_buffer(
+                self.audio.raw_data,
+                self.audio.channels,
+                self.audio.sample_width,
+                self.audio.frame_rate
+            )
+            self.is_playing = True
+            self.pushButton_play.setText('⏸')
+        elif self.is_playing:
+            self.player.stop()
+            self.is_playing = False
+            self.pushButton_play.setText('▶️')
+
+###### pip install simpleaudio ############
+        # Кровь и пот 3 часов дэбага, хотя нет подожди, уже sка 4 часа дэбага
+        # всё работает и славно 11.01.2024 1:57
+
+
+        def volume_change(self):
+            pass
+
+        def update_slider(self):
+            pass
+
+        def set_media_position(self):
+            pass
+
+        def select_item(self):
+            pass
 
 
 

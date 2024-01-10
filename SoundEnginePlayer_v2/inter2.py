@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
@@ -39,6 +38,8 @@ class Ui_MainWindow(object):
         self.horizontalSlider_volume.setGeometry(QtCore.QRect(150, 25, 100, 50))
         self.horizontalSlider_volume.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.517413, y1:0.994, x2:0.518, y2:0, stop:0 rgb(255, 183, 67), stop:1 rgba(255, 231, 150, 255))\n"
 "")
+        self.horizontalSlider_volume.setMaximum(100)
+        self.horizontalSlider_volume.setProperty("value", 50)
         self.horizontalSlider_volume.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_volume.setObjectName("horizontalSlider_volume")
         self.pushButton_mute = QtWidgets.QPushButton(self.centralwidget)
@@ -158,7 +159,7 @@ class Ui_MainWindow(object):
         self.pushButton_equalizer.setToolTip(_translate("MainWindow", "Эквалайзер"))
         self.pushButton_equalizer.setText(_translate("MainWindow", "🎛️"))
         self.pushButton_play.setToolTip(_translate("MainWindow", "Пауза/Продолжение"))
-        self.pushButton_play.setText(_translate("MainWindow", "⏸"))
+        self.pushButton_play.setText(_translate("MainWindow", "▶"))
         self.pushButton_prev.setToolTip(_translate("MainWindow", "Пред. Трек"))
         self.pushButton_prev.setText(_translate("MainWindow", "⏮"))
         self.pushButton_next.setToolTip(_translate("MainWindow", "След. Трек"))
@@ -176,13 +177,3 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(_translate("MainWindow", "Файл"))
         self.menu.setTitle(_translate("MainWindow", "Тема"))
         self.action_OpenFolder.setText(_translate("MainWindow", "Открыть папку"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
