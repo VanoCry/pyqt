@@ -33,6 +33,7 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
     volume = None  # Изменил имя переменной
     def __init__(self):
         super(Player, self).__init__()
+        self.playback_direction = 1
         self.setupUi(self)
         self.setFixedSize(self.size())
         ## Звук винды
@@ -49,6 +50,8 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
         self.listWidget.itemSelectionChanged.connect(self.select_item)
         #
         self.horizontalSlider_volume.valueChanged.connect(self.update_volume)
+        #
+        self.pushButton_next.clicked.connect(self.next_song)
         #
     def load_folder(self):
         self.listWidget.clear()
@@ -71,7 +74,38 @@ class Player(QtWidgets.QMainWindow, inter2.Ui_MainWindow):
         pass
 
     def next_song(self):
-        pass
+        if self.is_playing:
+            self.player.stop()
+            self.is_playing = False
+            self.pushButton_play.setText('▶️')
+
+        if self.listWidget.count() != 0:
+            current_row = self.listWidget.currentRow()
+
+            if self.playback_direction == 1:
+                next_row = current_row + 1
+            else:
+                next_row = current_row - 1
+
+            if next_row < 0:
+                next_row = self.listWidget.count() - 1
+            elif next_row >= self.listWidget.count():
+                next_row = 0
+
+            next_item = self.listWidget.item(next_row)
+            self.listWidget.setCurrentItem(next_item)
+            self.select_item()
+
+            if self.audio and not self.is_playing:
+                self.player = simpleaudio.play_buffer(
+                    self.audio.raw_data,
+                    self.audio.channels,
+                    self.audio.sample_width,
+                    self.audio.frame_rate
+                )
+                self.is_playing = True
+                self.pushButton_play.setText('⏸')
+
 
     def prev_song(self):
         pass
